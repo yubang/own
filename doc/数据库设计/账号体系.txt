@@ -1,0 +1,10 @@
+create table if not exists own_account(
+    id int(11) auto_increment,
+    username varchar(30),
+    password varchar(32),
+    halt varchar(32),
+    registerTime datetime,
+    loginTime datetime,
+    primary key(id),
+    unique(username)
+);
