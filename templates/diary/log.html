@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block "head" %}
+<title>个人日记---{{ obj.pushTime |date:"Y年m月d日" }}</title>
+{% endblock %}
+
+{% block "content" %}
+
+    <h3 align="center" style="color:skyblue;">
+        {{ obj.pushTime |date:"Y年m月d日" }}
+    </h3>
+    <hr>
+    {% if obj.picUrl  %}
+    <p align="center">
+        <img src="{{obj.picUrl}}" style="width:80%;">
+    </p>
+    <hr>
+    {% endif %}
+
+    <div class="bg-info" style="text-align:center;padding:5px;">{{obj.content|safe}}</div>
+
+    <p align="center" style="margin-top:30px;">
+        <a href="/diary/delete/{{obj.id}}" class="btn btn-danger" style="width:50%;">抹除日记</a>
+    </p>
+
+{% endblock %}

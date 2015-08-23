@@ -46,6 +46,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'own.middle.LoginCheck',
 )
 
 ROOT_URLCONF = 'own.urls'
@@ -88,6 +89,10 @@ STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, "templates"),
+)
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
 )
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.file'

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block "head" %}
+    <title>日记</title>
+{% endblock %}
+
+{% block "content" %}
+
+    <p align="center" style="margin-top:20px;">
+        <a href="/diary/write" class="btn btn-info">写日记</a>
+    </p>
+    <hr>
+
+    <div>
+
+        <div id="message">
+        </div>
+
+        <p align="center" id="m1">
+            <a href="javascript:getMessage();" class="btn btn-info" style="width:50%;">加载更多</a>
+        </p>
+
+        <p align="center" style="display:none;" id="m2">
+            正在努力拉取信息。。。
+        </p>
+
+        <p align="center" style="display:none;" id="m3">
+            已经全部加载完成
+        </p>
+
+    </div>
+
+{% endblock %}
+
+{% block "script" %}
+
+    <script>
+        var page = 1;
+
+        var template = '<div class="panel panel-success" onclick="location.href=\'!!href!!\'"><div class="panel-heading">!!time!!</div><div class="panel-body">!!content!!</div></div>';
+
+        function getMessage(){
+            $("#m1").hide();
+            $("#m2").show();
+            $.post("/diary/getMessage",{'page':page},function(data){
+                $("#m2").hide();
+
+                var html = "";
+                for(var i = 0;i< data.length; i++){
+                    var m1 = template.replace("!!time!!",data[i]['time']);
+                    var m2 = m1.replace("!!content!!",data[i]['content']);
+                    var m3 = m2.replace("!!href!!","/diary/log/" + data[i]['id']);
+                    html += m3;
+                }
+                $("#message").append(html);
+                if(data.length < 10){
+                    $("#m3").show();
+                }else{
+                    $("#m1").show();
+                }
+
+                page++;
+            });
+        }
+
+        $(document).ready(function(){
+            getMessage();
+        });
+
+    </script>
+
+{% endblock %}

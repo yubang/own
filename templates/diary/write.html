@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block "head" %}
+    <title>写日记</title>
+{% endblock %}
+{% block "content" %}
+
+    <h3 align="center" class="text-primary">
+        写日记
+    </h3>
+    <form action="" method="post" ENCTYPE="multipart/form-data">
+        <small class="text-success">可以添加一张图片</small>
+        <input type="file" name="pic" class="form-control">
+        <br>
+        <textArea name="content" class="form-control" rows="15" placeholder="请输入255个字以内的文件" required></textArea>
+        <p align="center" style="margin-top:10px;">
+            <input class="btn btn-info" type="submit" value="发表日记">
+        </p>
+    </form>
+
+{% endblock %}

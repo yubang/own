@@ -12,3 +12,14 @@ class AccountModel(models.Model):
 
     class Meta:
         db_table = "own_account"
+
+
+class DiaryModel(models.Model):
+    uid = models.IntegerField()
+    picUrl = models.CharField(max_length=200)
+    content = models.CharField(max_length=255)
+    pushTime = models.DateTimeField()
+    status = models.IntegerField()
+
+    class Meta:
+        db_table = "own_diary"

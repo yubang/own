@@ -34,7 +34,7 @@ def account(request, option):
                 if hashlib.md5(password + obj.halt).hexdigest() == obj.password:
                     obj.loginTime = time.strftime("%Y-%m-%d %H:%M:%S")
                     obj.save()
-                    request.session['user'] = time.time()
+                    request.session['user'] = obj.id
                     code = 0
                 else:
                     code = -2
@@ -46,7 +46,7 @@ def account(request, option):
                 password = hashlib.md5(password + halt).hexdigest()
                 obj = AccountModel(username=username, password=password, halt=halt, registerTime=time.strftime("%Y-%m-%d %H:%M:%S"))
                 obj.save()
-                request.session['user'] = time.time()
+                request.session['user'] = obj.id
                 code = 0
             except IntegrityError:
                 code = -1

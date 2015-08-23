@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url(r'^account/(?P<option>.+)$', 'own.views.account'),
     url(r'^own/$', 'own.views.own'),
     url(r'^own/exit$', 'own.views.exit_account'),
+    url(r'^diary/', include("diary.urls")),
 )

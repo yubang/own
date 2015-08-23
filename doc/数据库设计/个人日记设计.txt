@@ -1,0 +1,10 @@
+create table if not exists own_diary(
+
+    id int(11) auto_increment,
+    uid int(11),
+    picUrl varchar(200) not null comment '图片文件名',
+    content varchar(255) not null comment '日记内容',
+    pushTime datetime not null comment '发表时间',
+    status tinyint(1) not null comment '0为可见，1为删除',
+    primary key(id)
+) DEFAULT CHARSET=utf8;
