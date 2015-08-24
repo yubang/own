@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block "head" %}
+    <title>制作瓶子</title>
+{% endblock %}
+{% block "content" %}
+
+    <h3 align="center" class="text-primary">
+        制作瓶子
+    </h3>
+
+    <form action="" method="post">
+        <p>
+            <strong class="text-success">送达时间：</strong>
+            <input name="targetTime" type="date" class="form-control" required>
+        </p>
+        <p>
+            <textarea name="content" maxlength="255" rows="15" class="form-control" placeholder="请输入内容" required></textarea>
+        </p>
+        <p align="center">
+            <input type="submit" value="制作" class="btn btn-success" style="width:50%;">
+        </p>
+    </form>
+{% endblock %}

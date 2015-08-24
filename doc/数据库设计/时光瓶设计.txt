@@ -1,0 +1,9 @@
+create table if not exists own_time_bottle(
+    id int(11) auto_increment,
+    uid int(11)  not null comment '用户id',
+    content varchar(255) not null comment '内容',
+    targetTime date not null comment '目标时间',
+    createTime datetime not null comment '创建时间',
+    status tinyint(1) not null comment '0为正常，1为已经阅读',
+    primary key(id)
+) DEFAULT CHARSET=utf8;

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block "head" %}
+    <title>时光瓶</title>
+{% endblock %}
+
+{% block "content" %}
+
+    <p align="center" style="margin-top:20px;">
+        <a href="/time/make" class="btn btn-info" style="width:50%;">制作瓶子</a>
+    </p>
+    <hr>
+
+    <p id="tip" align="center">
+        <strong>
+            现在还没有收到瓶子，请耐心等候！
+        </strong>
+    </p>
+
+    <div id="message" style="width:100%;">
+
+    </div>
+
+{% endblock %}
+
+{% block "script" %}
+    <script>
+
+        var t = null;
+        var html = "";
+        function getMessage(){
+
+            $.get("/time/get",{},function(data){
+                if(data != html){
+                    $("#tip").hide();
+                    $("#message").html(data);
+                    html = data;
+                }
+                if(t != null)
+                    clearTimeout(t);
+                t = setTimeout("getMessage()",3000);
+            });
+
+        }
+
+        var index = 0;
+        function changeColor(){
+            var arrs = ['blue','skyblue','green','black','#ffa6ff'];
+            $(".bottle-message").css("color",arrs[index]);
+            index ++;
+            if(index == 5){index = 0;}
+        }
+
+        $(document).ready(function(){
+            getMessage();
+            setInterval("changeColor()","5000");
+        });
+    </script>
+{% endblock %}

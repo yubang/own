@@ -1,0 +1,16 @@
+{% for obj in objs %}
+
+    <div class="panel panel-success">
+        <div class="panel-heading">{{obj.time}}的瓶子</div>
+        <div class="panel-body">
+
+            <textArea class="bottle-message" style="width:100%;border:0;text-align:left;" readonly>{{obj.content}}</textArea>
+
+            <p align="right" style="margin-top:10px;">
+                <strong class="text-primary">制作于：{{obj.createTime}}</strong>
+            </p>
+
+        </div>
+    </div>
+
+{% endfor %}

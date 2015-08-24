@@ -23,3 +23,15 @@ class DiaryModel(models.Model):
 
     class Meta:
         db_table = "own_diary"
+
+
+class TimeBottleModel(models.Model):
+    "时光瓶类"
+    uid = models.IntegerField()
+    content = models.CharField(max_length=255)
+    targetTime = models.DateField()
+    createTime = models.DateTimeField()
+    status = models.IntegerField()
+
+    class Meta:
+        db_table = "own_time_bottle"
