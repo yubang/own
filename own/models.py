@@ -35,3 +35,14 @@ class TimeBottleModel(models.Model):
 
     class Meta:
         db_table = "own_time_bottle"
+
+
+class PaperModel(models.Model):
+    "纸条类"
+    uid = models.IntegerField()
+    content = models.CharField(max_length=255)
+    status = models.IntegerField()
+    createTime = models.DateTimeField()
+
+    class Meta:
+        db_table = "own_paper"
