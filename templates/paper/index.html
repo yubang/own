@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block "head" %}
+    <title>小纸条</title>
+{% endblock %}
+{% block "content" %}
+
+    <p align="center" style="margin-top:10px;">
+        <a href="/paper/write" class="btn btn-success">写纸条</a>
+    </p>
+    <hr>
+
+    <p align="center">
+        <strong id="text"></strong>
+    </p>
+
+    <div class="progress">
+        <div id="m" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+            0%
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block "script" %}
+
+    <script>
+        var i = 0;
+        var lock = false;
+        var t = null;
+
+        function updateLock(){
+            i = 0;
+            lock = false;
+            clearTimeout(t);
+        }
+
+        function getData(){
+            lock = true;
+            $.get('/paper/data',{},function(data){
+                $("#text").html(data);
+                t = setTimeout("updateLock()",3000)
+            });
+        }
+
+        function changeTip(){
+            if(lock)return;
+            $("#m").css("width",i+"%");
+            $("#m").html(i+"%");
+            i+=1;
+            if (i > 100){
+                getData()
+                i=0;
+            }
+        }
+        $(document).ready(function(){
+            setInterval("changeTip()",200);
+        });
+    </script>
+
+{% endblock %}

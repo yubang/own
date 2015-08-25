@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^own/exit$', 'own.views.exit_account'),
     url(r'^diary/', include("diary.urls")),
     url(r'^time/', include('timeBottle.urls')),
+    url(r'^paper/', include('paper.urls')),
 )

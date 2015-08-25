@@ -22,7 +22,7 @@ def get(request):
         data['content'] = obj.content
         data['createTime'] = obj.createTime.strftime("%Y年%m月%d日 %H时%M分%S秒")
 
-        temp_obj = datetime.datetime.now() - obj.createTime
+        temp_obj = datetime.date.today() - datetime.datetime.strptime(str(obj.createTime), "%Y-%m-%d %H:%M:%S").date()
         days = temp_obj.days
         if days == 0:
             data['time'] = "今天"
@@ -45,6 +45,6 @@ def make(request):
     else:
         content = request.POST.get('content', None)
         target_time = request.POST.get('targetTime', None)
-        obj = TimeBottleModel(content=content, targetTime=target_time, createTime=time.strftime("%Y-%m-%d %H:%M:%S"), status=0, uid=request.session['user'])
+        obj = TimeBottleModel(content=content, targetTime=target_time, createTime=datetime.datetime.now(), status=0, uid=request.session['user'])
         obj.save()
         return HttpResponseRedirect("/time/")
