@@ -98,6 +98,7 @@ STATICFILES_DIRS = (
 SESSION_ENGINE = 'django.contrib.sessions.backends.file'
 SESSION_COOKIE_AGE = 3600 * 24 * 30
 
+#调试模式输出sql语句
 if DEBUG:
     LOGGING = {
         'version': 1,
@@ -116,3 +117,10 @@ if DEBUG:
             },
         }
     }
+
+
+# 七牛存储信息
+QINIU_HOST = ""
+QINIU_KEY = ""
+QINIU_TOKEN = ""
+QINIU_BUCKET = ""

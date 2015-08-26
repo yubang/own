@@ -8,9 +8,17 @@
     </head>
     <body>
 
-        {% block "content" %}
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <font class="text-info">首页</font>
+                    </a>
+                </div>
+            </div>
+        </nav>
 
-        {% endblock %}
+        {% block "content" %}{% endblock %}
 
         <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>

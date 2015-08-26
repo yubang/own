@@ -1,9 +1,10 @@
 # coding:UTF-8
 
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse, HttpResponseForbidden, HttpResponseServerError
 from django.core.exceptions import ObjectDoesNotExist
 from own.models import DiaryModel
+from own.lib import upload_file, get_download_file_url
 import time
 import hashlib
 import os
@@ -22,6 +23,10 @@ def write(request):
         if 'pic' in request.FILES:
             pic_data = request.FILES['pic'].read()
             path = hashlib.md5(pic_data).hexdigest()
+            if not upload_file(path, pic_data):
+                return HttpResponseServerError("上传文件出错!")
+            pic_url = path
+            """
             pic_url = os.path.join('/static/upload/pic/', path[0:8], path[8:16], path[16:24], path[24:32] + ".png")
 
             #保存上传的图片
@@ -31,6 +36,7 @@ def write(request):
                 if not os.path.exists(dir_path):
                     os.makedirs(dir_path)
                 open(fp_path, 'wb').write(pic_data)
+            """
 
         else:
             pic_url = ''
@@ -69,6 +75,8 @@ def log(request, diary_id):
 
     try:
         obj = DiaryModel.objects.get(id=diary_id, uid=request.session['user'], status=0)
+        if obj.picUrl:
+            obj.picUrl = get_download_file_url(obj.picUrl)
         return render_to_response("diary/log.html", {'obj': obj})
     except ObjectDoesNotExist:
         return HttpResponseForbidden("不要查看别人的日记")
